@@ -1,12 +1,17 @@
 import { useAuthStore } from './store/authStore'
 import { Login } from './components/Login'
+import { shallow } from 'zustand/shallow'
 import './App.css'
 
 function App() {
-  // Accedemos a cada valor individualmente para evitar el bucle infinito
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
-  const user = useAuthStore((state) => state.user)
-  const logout = useAuthStore((state) => state.logout)
+  const { isAuthenticated, user, logout } = useAuthStore(
+    (state) => ({
+      isAuthenticated: state.isAuthenticated,
+      user: state.user,
+      logout: state.logout
+    }),
+    shallow
+  )
 
   return (
     <div className="App">
