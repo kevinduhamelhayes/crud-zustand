@@ -10,43 +10,27 @@ function App() {
   const logout = useAuthStore((state) => state.logout)
 
   return (
-    <div className="App">
+    <div className="App fade-in">
       {isAuthenticated ? (
-        <div>
-          <div style={{ 
-            padding: '20px',
-            backgroundColor: '#f8f9fa',
-            borderBottom: '1px solid #ddd',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center'
-          }}>
+        <>
+          <header className="header">
             <div>
-              <h1 style={{ margin: '0' }}>Bienvenido, {user?.username}!</h1>
-              <p style={{ margin: '5px 0 0 0', color: '#666' }}>
-                {user?.email} - Role: {user?.role}
-              </p>
+              <h1>Bienvenido, {user?.username}!</h1>
+              <p>{user?.email} - Role: {user?.role}</p>
             </div>
             <button
               onClick={logout}
-              style={{
-                padding: '10px',
-                backgroundColor: '#dc3545',
-                color: 'white',
-                border: 'none',
-                borderRadius: '4px',
-                cursor: 'pointer'
-              }}
+              className="btn btn-danger"
             >
               Cerrar Sesión
             </button>
-          </div>
+          </header>
           
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 400px', gap: '20px' }}>
+          <div className="main-container">
             <Products />
             <Cart />
           </div>
-        </div>
+        </>
       ) : (
         <Login />
       )}
