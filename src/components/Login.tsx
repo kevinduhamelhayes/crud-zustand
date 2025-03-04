@@ -1,20 +1,21 @@
 import { useState } from 'react'
-import { useAuthStore } from '../store/authStore'
+import { useAuthStore, type User } from '../store/authStore'
 
 export const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const login = useAuthStore(state => state.login)
+  const login = useAuthStore((state) => state.login)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     // Simulamos un login exitoso con datos de prueba
-    login({
+    const mockUser: User = {
       id: '1',
       username: 'usuario_prueba',
       email: email,
       role: 'user'
-    })
+    }
+    login(mockUser)
   }
 
   return (
