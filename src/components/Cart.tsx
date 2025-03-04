@@ -19,6 +19,7 @@ export const Cart = () => {
         <button
           onClick={clearCart}
           className="btn btn-danger"
+          style={{ fontSize: '0.85rem', padding: '0.4rem 0.8rem' }}
         >
           Vaciar carrito
         </button>
@@ -29,11 +30,13 @@ export const Cart = () => {
           <div
             key={item.product.id}
             className="cart-item"
+            style={{ margin: '12px 0', padding: '12px 0' }}
           >
             <img
               src={item.product.image}
               alt={item.product.name}
               className="cart-item-image"
+              style={{ width: '70px', height: '70px' }}
             />
             
             <div className="cart-item-info">
@@ -41,29 +44,31 @@ export const Cart = () => {
               <p className="cart-item-price">${item.product.price.toFixed(2)}</p>
             </div>
 
-            <div className="quantity-control">
+            <div className="cart-quantity-controls">
+              <div className="quantity-control">
+                <button
+                  onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
+                  className="decrease"
+                >
+                  -
+                </button>
+                <span style={{ width: '24px', textAlign: 'center' }}>{item.quantity}</span>
+                <button
+                  onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
+                  className="increase"
+                >
+                  +
+                </button>
+              </div>
+
               <button
-                onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
-                className="decrease"
+                onClick={() => removeItem(item.product.id)}
+                className="btn btn-danger"
+                style={{ fontSize: '0.75rem', padding: '3px 8px' }}
               >
-                -
-              </button>
-              <span>{item.quantity}</span>
-              <button
-                onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
-                className="increase"
-              >
-                +
+                Eliminar
               </button>
             </div>
-
-            <button
-              onClick={() => removeItem(item.product.id)}
-              className="btn btn-danger"
-              style={{ marginLeft: '10px', padding: '5px 10px', fontSize: '0.8rem' }}
-            >
-              Eliminar
-            </button>
           </div>
         ))}
       </div>
